@@ -1,0 +1,31 @@
+@mixin theAnimation($WhatToAnimate...) {
+    $max: length($WhatToAnimate);
+    $Animation: '';
+
+    @for $i from 1 through $max {
+        $Animation: #{$Animation + nth($WhatToAnimate, $i)};
+
+        @if $i < $max {
+            $Animation: #{$Animation + ", "};
+        }
+    }
+    -webkit-animation: $Animation;
+    -moz-animation:    $Animation;
+    -o-animation:      $Animation;
+    animation:         $Animation;
+}
+
+@mixin myKeyFrame($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
