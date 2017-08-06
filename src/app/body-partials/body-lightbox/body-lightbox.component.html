@@ -1,0 +1,5 @@
+<div class="lighbox-container">
+    <div (click)="closelLightBox()" class="close-button"></div>
+    <iframe [src]="VideoLink | safeIframe" frameborder="0" allowfullscreen volume="0"></iframe>
+</div>
+<div class="overlay"></div>

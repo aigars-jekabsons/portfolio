@@ -1,0 +1,37 @@
+<div class="container" track-keypress>
+
+      <div class="playingfield">
+        <div class="IntroText" *ngIf="!GameTriggered">
+          <h1>
+          Controlls : <img src="assets/images/icons/leftright.png" /><br/>
+          Press ctrl key to increase player speed.<br/> 
+          If you collect 3 cherries the ball speed will be reduced and you will stay in control.<br/> 
+          Level incrementation time : {{LevelTimer/1000}} seconds.<br/><br/>
+          May the best win.
+          </h1>
+          <a (click)="TriggerTheGame()" class="play"></a>
+        </div>
+        <div class="GameOverMessage" *ngIf="Playagain">
+          <h1>Game is over. You lost at level : {{SpeedLevel}} with {{Points}} points.
+          </h1>
+            <a (click)="TriggerTheGame()" class="play"></a>
+        </div>
+        <div class="cherry-counter" >
+          <img src="assets/images/icons/{{FirstCherryIcon}}" />
+          <img src="assets/images/icons/{{SecondCherryIcon}}" />
+          <img src="assets/images/icons/black-cherry.png" />
+
+        </div>
+        <span id="cherry" class="cherry"><img src="assets/images/icons/cherry.png" /></span>
+        <span id="player" class="player" style="left:460px;"></span>
+        <span id="squashball" class="squashball" style="left:510px;top:485px;"></span>
+      </div>
+      <div class="statsContainer fire">
+          <h2>Level : {{SpeedLevel}}</h2>
+          <h2>Points : {{Points}}</h2>
+          <h2>Next level : {{Seconds}}</h2>
+          <h2>Player speed : {{playerspeed}}</h2>
+          
+          
+      </div>
+</div>

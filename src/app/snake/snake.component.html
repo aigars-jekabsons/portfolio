@@ -1,0 +1,25 @@
+<div class="SnakeGrid">
+
+  <div class="statsContainer">
+      <h2>Score : {{score}}</h2> 
+      <h2 class="pull-right">Angular 2 Snake</h2>
+  </div>
+  <div class="selectmode" *ngIf="selectmode">
+    <h2 *ngIf="GameOver">You lost with high score : {{score}}</h2>
+    <h2>Select mode</h2>
+    <button class="btn btn-primary" (click)="classic(true)">classic</button><br/>
+    <button class="btn btn-primary" (click)="classic(false)">No walls</button><br/>
+    <button class="btn btn-primary">Custom (coming soon)</button><br/>
+    <p>You can control snake with Up, Down, Left, Right arrows. After every food piece eaten, snake speed increases.</p>
+  </div>
+    <div class="rows" *ngFor="let GridID of SnakeGrid; let i = index ">
+      <div class="columns type-{{GridID2}}" *ngFor="let GridID2 of GridID">
+
+      </div> 
+    </div> 
+
+</div>
+
+
+
+

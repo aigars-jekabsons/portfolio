@@ -1,0 +1,35 @@
+
+<div class="col-sm-12 disablefloat centerblock">
+    <div class="container">
+        <div class="col-sm-10 disablefloat centerblock  text-white">
+            <h1 style="margin-top:35px;margin-bottom:35px"><strong>Work projects</strong></h1>
+        </div>
+    </div>
+
+
+    <div class="portfolio-photos" id="portfolio-photos">
+        
+        <div class="grid">
+            <figure (click)="DisplayProject($event.target)" *ngFor="let PortfolioItem of _ContentHandlerService | arrayFix, let i = index" class="effect-zoe" id="{{i}}" title="{{PortfolioItem.Title}}">
+            <!--<figure *ngFor="let PortfolioItem of _ContentHandlerService | arrayFix, let i = index" class="effect-zoe" id="{{i}}">-->
+                
+                <img src="assets/images/{{PortfolioItem.ImageSource}}" alt="img25"/>
+                <p class="description">{{PortfolioItem.description}}</p>
+                <figcaption>
+                    <span class="icon-links">
+                            <div class="col-xs-3 nopadding">
+                                <img class="Techstack" src="assets/images/icons/scss.png"/>
+                            </div>
+                            <div class="col-xs-3 nopadding ">
+                                <img class="Techstack" src="assets/images/icons/{{PortfolioItem.techstack}}"/>
+                            </div>
+
+                        <div class="col-xs-6 nopadding">
+                            <img class="CMS" src="assets/images/icons/{{PortfolioItem.CMSPlatform}}"/>
+                        </div>   
+                    </span>
+                </figcaption>			
+            </figure>
+        </div>
+    </div>
+</div>
