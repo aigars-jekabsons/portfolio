@@ -419,13 +419,20 @@ margin-bottom: 0;
 .lighbox-container{
     display:none;
     position:fixed;
-    top:50%;
-    left:50%;
+
     background:#fff;
     border:2px solid grey;
     z-index:4;
+    &.video{
+        top:50%;
+        left:50%;
+    }
+    &.content{
+        top:25%;
+        left:35%;
+    }
 }
-    
+
 .overlay{
   display:none;
   position: fixed;
@@ -442,6 +449,21 @@ margin-bottom: 0;
     li {list-style: none;}
     ul{padding-left:0px;}
     .expertiseFont {color:#78749c;font-weight:bold;}
+}
+@media only screen and (max-width: 1000px) {
+    app-body-lightbox {
+        .lighbox-container.content{
+            position:fixed;
+            height:100%;
+            width:100%;
+            overflow:auto;
+            margin-top: 0px;
+            margin-left: -50%;
+        }
+        .close-button{
+            right:20%!important;
+        }
+    }
 }
 
 @media only screen and (max-width: 600px) {

@@ -12,7 +12,9 @@ export class BodyPortfolioComponent implements OnInit {
   @Input() displayPortfolioItem:boolean; portfolioObject:string;
   @Output() DisplayPortfolioItem:EventEmitter<any> = new EventEmitter(); 
   @Output() PortfolioObject:EventEmitter<any> = new EventEmitter();
-
+  @Output() VideoLink:EventEmitter<any> = new EventEmitter();
+  @Output() IsLightBoxVideo:EventEmitter<any> = new EventEmitter();
+ 
   DisplayProject(event){
   
   if(event.parentElement.nodeName == 'FIGCAPTION'){
@@ -20,18 +22,24 @@ export class BodyPortfolioComponent implements OnInit {
   }else{
     var TargetedItem = event.parentElement
   }
- TargetedItem.classList.add('active')
-  document.body.classList.add('hideoverflow')
-  this.displayPortfolioItem = true;
+
+//  TargetedItem.classList.add('active')
+//   document.body.classList.add('hideoverflow')
+//   this.displayPortfolioItem = true;
   this.portfolioObject = this._ContentHandlerService[TargetedItem.id];
   
-  setTimeout(() => {
-      this.DisplayPortfolioItem.emit(this.displayPortfolioItem);
-      this.PortfolioObject.emit(this.portfolioObject);
-  }, 1200);
+//   setTimeout(() => {
+//       this.DisplayPortfolioItem.emit(this.displayPortfolioItem);
+//       this.PortfolioObject.emit(this.portfolioObject);
+//   }, 1200);
+  this.IsLightBoxVideo.emit(false);
+  this.VideoLink.emit(this.portfolioObject);
+
+  document.body.classList.add('displayLightbox');
+}
 
       
-}
+
 
  Portfolio:Array <any> = []; 
 

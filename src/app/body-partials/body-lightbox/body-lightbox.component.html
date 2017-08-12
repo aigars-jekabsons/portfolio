@@ -1,5 +1,25 @@
-<div class="lighbox-container">
+<div *ngIf="IslightboxContentaVideo" class="lighbox-container video">
     <div (click)="closelLightBox()" class="close-button"></div>
     <iframe [src]="VideoLink | safeIframe" frameborder="0" allowfullscreen volume="0"></iframe>
+</div>
+<div *ngIf="!IslightboxContentaVideo" class="lighbox-container content">
+    <div (click)="closelLightBox()" class="close-button"></div>
+    <div class="col-md-3">
+        <h2>{{VideoLink.Title}}</h2>
+    </div>
+    <div class="col-md-9">
+        <div class="carousel">
+            <ul class="slides">
+                <li *ngFor="let CarouselImages of VideoLink.carouselImages ">
+                    <img src="assets/images/portfolioImages/{{CarouselImages.image}}" alt="">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <img class="Techstack" src="assets/images/icons/scss.png"/>
+        <img class="Techstack" src="assets/images/icons/{{VideoLink.techstack}}"/>
+        <img class="CMS" src="assets/images/icons/{{VideoLink.CMSPlatform}}"/>
+    </div>
 </div>
 <div class="overlay"></div>

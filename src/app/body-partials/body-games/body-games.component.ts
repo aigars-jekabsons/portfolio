@@ -9,9 +9,12 @@ export class BodyGamesComponent implements OnInit {
 
 
   @Output() VideoLink:EventEmitter<any> = new EventEmitter();
+  @Output() IsLightBoxVideo:EventEmitter<any> = new EventEmitter();
 
 LaunchLightbox = (videoLink) => {
   this.VideoLink.emit(videoLink);
+  
+  this.IsLightBoxVideo.emit(true);
   document.body.classList.add('displayLightbox');
 }
   constructor() { }

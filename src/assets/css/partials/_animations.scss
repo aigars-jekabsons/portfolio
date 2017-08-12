@@ -290,9 +290,13 @@ figure.effect-zoe.active{
     100%  { left: 0%; }
 }
 
-@keyframes lightbox{
+@keyframes lightbox-video{
     0%   { height:0px;width:0px;margin-top:0px;margin-left:0px; }
     100%  { height:300px;width:600px;margin-top:-150px;margin-left:-300px; }
+}
+@keyframes lightbox-content{
+    0%   { height:0px;width:0px;margin-top:0px;margin-left:0px; }
+    100%  { height:600px;width:1000px;margin-top:-150px;margin-left:-300px; }
 }
 @keyframes lightbox-overlay{
     0%   { opacity:0; }
@@ -305,8 +309,12 @@ figure.effect-zoe.active{
 }
 .displayLightbox{
     overflow:hidden;
-    .lighbox-container{
-        @include theAnimation('lightbox 1s forwards linear');
+    .video{
+        @include theAnimation('lightbox-video 1s forwards linear');
+        animation-delay: 0.5s;
+    }
+    .content{
+        @include theAnimation('lightbox-content 1s forwards linear');
         animation-delay: 0.5s;
     }
     .overlay{

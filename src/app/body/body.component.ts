@@ -11,6 +11,7 @@ export class BodyComponent implements OnInit {
  displayPortfolioItem:boolean = false;
   Myvariable:any;
   videoLink:any;
+  IslightboxContentaVideo:any;
   constructor() { 
    }
 CheckPageStatus(event){
@@ -23,6 +24,10 @@ DisplayPortfolioContent(event){
 FetchVideoLink(event){
   this.videoLink = event;
 }
+FetchLightBoxContent(event){
+  this.IslightboxContentaVideo = event;
+}
+
 
   ngOnInit() {
     
