@@ -27,8 +27,10 @@ app.set('port', port);
 const server = http.createServer(app);
 
 app.get('/dowork', function(req, res) {
-    res = 'test';
-    console.log(res);
+    let content = ['test']
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.send(content);
     res.end();
 });
 

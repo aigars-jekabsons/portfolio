@@ -8,12 +8,12 @@ import { Http, Response } from '@angular/http';
 })
 export class BodyContactmeComponent implements OnInit {
 
-  result: Object;
+  result: any;
 
     TriggerAlert = () => {
       console.log('triggered');
-      this.http.get('http://localhost:3000/dowork').map((res: Response) => res.json()).subscribe(res => this.result = res);
-      console.log(this.result);
+      this.http.get('http://localhost:3000/dowork').map((res) => res.json()).subscribe(res => this.result = res);
+
 }
 
   constructor(public http: Http) { 
