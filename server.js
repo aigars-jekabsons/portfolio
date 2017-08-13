@@ -5,7 +5,6 @@ const http = require('http');
 const bodyParser = require('body-parser');
 
 // Get our API routes
-const api = require('./server/routes/api');
 
 const app = express();
 
@@ -13,8 +12,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Set our api routes
-app.use('/api', api);
+
 
 
 /**
@@ -28,7 +26,16 @@ app.set('port', port);
  */
 const server = http.createServer(app);
 
+app.get('/dowork', function(req, res) {
+    res = 'test';
+    console.log(res);
+    res.end();
+});
+
 /**
  * Listen on provided port, on all network interfaces.
  */
 server.listen(port, () => console.log(`API running on localhost:${port}`));
+
+
+
