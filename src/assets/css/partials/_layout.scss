@@ -429,10 +429,18 @@ margin-bottom: 0;
     }
     &.content{
         top:25%;
-        left:35%;
+        left:50%;
+        width:1000px;
+        margin-top:-150px;
+        margin-left:-500px; 
+        opacity:0;
+        background: rgba(255,255,255,0.7);
     }
 }
-
+.techstackTitle {
+    border-bottom: 1px solid grey;
+    padding-bottom: 10px;
+}    
 .overlay{
   display:none;
   position: fixed;
@@ -450,6 +458,52 @@ margin-bottom: 0;
     ul{padding-left:0px;}
     .expertiseFont {color:#78749c;font-weight:bold;}
 }
+
+.CloseButton {
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    z-index: 4;
+    left: 10PX;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    transition: transform .25s ease-in-out;
+    &:hover{
+        transform: rotate(180deg);
+    }
+    &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 32px;
+        height: 0;
+        border-top: 1px solid rgba(0,0,0,0.5);
+        transform: rotate(45deg);
+        transform-origin: center;
+    }
+    &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 32px;
+        height: 0;
+        border-top: 1px solid rgba(0,0,0,0.5);
+        transform: rotate(-45deg);
+        transform-origin: center;
+    }
+}
+
 @media only screen and (max-width: 1000px) {
     app-body-lightbox {
         .lighbox-container.content{
@@ -463,9 +517,16 @@ margin-bottom: 0;
         .close-button{
             right:20%!important;
         }
+        .pull-right, .pull-left{
+            float:none!important
+        }
     }
 }
-
+@media only screen and (max-width: 992px) {
+    .textcenteronMobile {
+        text-align:center;
+    }
+}
 @media only screen and (max-width: 600px) {
     app-body-lightbox {
         .lighbox-container{

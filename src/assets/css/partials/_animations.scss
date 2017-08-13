@@ -295,8 +295,8 @@ figure.effect-zoe.active{
     100%  { height:300px;width:600px;margin-top:-150px;margin-left:-300px; }
 }
 @keyframes lightbox-content{
-    0%   { height:0px;width:0px;margin-top:0px;margin-left:0px; }
-    100%  { height:600px;width:1000px;margin-top:-150px;margin-left:-300px; }
+    0%   { opacity:0; }
+    100%  { opacity:1;}
 }
 @keyframes lightbox-overlay{
     0%   { opacity:0; }
