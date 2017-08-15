@@ -503,7 +503,21 @@ margin-bottom: 0;
         transform-origin: center;
     }
 }
-
+.myContactForm  {
+    input, textarea{
+    border: none;
+    background: #dfdfdf;
+    padding: 8px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border-radius: 4px;
+    color:#000;
+    resize: none;
+    }
+}
+.emailinput {
+    width:49%;
+}
 @media only screen and (max-width: 1000px) {
     app-body-lightbox {
         .lighbox-container.content{
@@ -525,6 +539,9 @@ margin-bottom: 0;
 @media only screen and (max-width: 992px) {
     .textcenteronMobile {
         text-align:center;
+    }
+    .emailinput {
+        width:100%;
     }
 }
 @media only screen and (max-width: 600px) {

@@ -1,3 +1,13 @@
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "www.ajtechlab.com",
+  user: "wwwajtec_ajtech",
+  password: "f0A%iv$R5kBh",
+  database: "wwwajtec_ajtechlab"
+});
+
+
 const express = require('express');
 const router = express.Router();
 
@@ -11,34 +21,27 @@ router.get('/', (req, res) => {
 });
 
 // Get all posts
-router.get('/posts', (req, res) => {
-  // Get posts from the mock api
-  // This should ideally be replaced with a service that connects to MongoDB
-  axios.get(`${API}/posts`)
-    .then(posts => {
-      res.status(200).json(posts.data);
-    })
-    .catch(error => {
-      res.status(500).send(error)
-    });
+router.get('/getform', function(req, res) {
+    let content = ['tests']
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.send(content);
+    res.end();
+});
+
+
+
+
+
+router.post('/postform', function(req, res) {    
+
+ var sql = "INSERT INTO ContactMeForm (name, email, number, message) VALUES ?";
+var values = [req.body.data]
+  con.query(sql, [values], function (err, result) {
+    if (err) throw err;
+  });
 });
 
 module.exports = router;
 
 
-
-
-
-    var Connection = require('tedious').Connection;  
-    var config = {  
-        userName: 'yourusername',  
-        password: 'yourpassword',  
-        server: 'yourserver.database.windows.net',  
-        // If you are on Microsoft Azure, you need this:  
-        options: {encrypt: true, database: 'AdventureWorks'}  
-    };  
-    var connection = new Connection(config);  
-    connection.on('connect', function(err) {  
-    // If no error, then good to proceed.  
-        console.log("Connected");  
-    }); 

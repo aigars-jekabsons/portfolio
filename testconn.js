@@ -4,14 +4,14 @@ var mysql = require('mysql');
 
 var con = mysql.createConnection({
   host: "www.ajtechlab.com",
-  user: "wwwajtechlab",
-  password: "Hus0RLGVqAsb",
-  database: "wwwajtec_testing"
+  user: "wwwajtec_ajtech",
+  password: "f0A%iv$R5kBh",
+  database: "wwwajtec_ajtechlab"
 });
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
+// con.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Connected!");
  //Creating a table
  //var sql = "CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))";
  //Injecting information into the table
@@ -51,9 +51,18 @@ con.connect(function(err) {
 //look for specific record inside of a DB
 //con.query("SELECT * FROM customers WHERE address = 'Park Lane 38'", function (err, result) {
 //find record that starts with s
-    con.query("SELECT * FROM customers WHERE address LIKE 'S%'", function (err, result) {
+    // con.query("SELECT * FROM customers WHERE address LIKE 'S%'", function (err, result) {
+    // if (err) throw err;
+    // console.log(result);
+    //console.log(result[2].address);
+//   });
+// });
+    var sql = "CREATE TABLE ContactMeForm  (name VARCHAR(255), email VARCHAR(255), number VARCHAR(255), message VARCHAR(255))";
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
-    //console.log(result[2].address);
   });
 });
