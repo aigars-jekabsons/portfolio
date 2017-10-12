@@ -13,7 +13,7 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 var app = express();
 var port = process.env.PORT || '3000';
-
+var timeout = require('connect-timeout');
 require('./config/passport')(passport);
 
 // set up our express application
@@ -46,11 +46,12 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api', api);
-
+app.use(timeout('1s'));
 app.set('port', port);
 
 require('./server/routes/auth.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);
+
 console.log('The magic happens on port ' + port);

@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+html, body, .fluid-container{
+    height:100%;
+}
+
+.router-wrapper{
+    width: calc(100% - 200px);
+    display: inline-block;
+    position: absolute;
+    padding: 10px;
+}

@@ -1,0 +1,32 @@
+
+<h1>Contact Form DATA</h1>
+<div class="col-md-12 text-center">
+    <table class="FormTable table text-left">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Number</th>
+              <th>Message</th>
+              <th>Have I replied?</th>
+              <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let FormData of ContactFormData" id="">
+            <td>{{FormData.name}}</td>
+            <td>{{FormData.email}}</td>
+            <td>{{FormData.number}}</td>
+            <td>{{FormData.message}}</td>
+            <td>{{FormData.Replied}}</td>
+            <td>
+              <button class="btn btn-primary btn-xs" (click)="ChangeToReplied(FormData.ID)" *ngIf="FormData.Replied == 'Nop'">Replied</button>
+              <button class="btn btn-warning btn-xs" (click)="DeleteContact(FormData.ID)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      
+      </table>
+      <button class="btn btn-primary" (click)="generateJSON()">GenerateJSON</button>
+</div>
+

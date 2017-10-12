@@ -18,9 +18,12 @@ module.exports = {
         host: host,
         user: user,
         password: password,
-        database: database
+        database: database,
+        multipleStatements: false
     }
 };
+
+
 
 
 

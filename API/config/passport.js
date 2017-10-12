@@ -7,7 +7,26 @@ var LocalStrategy   = require('passport-local').Strategy;
 var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
 var dbconfig = require('./database');
-var connection = mysql.createConnection(dbconfig.connection);
+var connection = mysql.createConnection({
+    'host': 'www.ajtechlab.com',
+    'user': 'wwwajtec_ajtech',
+    'password': 'f0A%iv$R5kBh',
+    'database': 'wwwajtec_ajtechlab',
+    'users_table': 'users'
+    });
+
+setInterval(function () {
+    connection.end(function(){
+        connection = mysql.createConnection({
+                'host': 'www.ajtechlab.com',
+                'user': 'wwwajtec_ajtech',
+                'password': 'f0A%iv$R5kBh',
+                'database': 'wwwajtec_ajtechlab',
+                'users_table': 'users'
+                });
+        connection.connect();
+    });
+  }, 180000);
 
 connection.query('USE ' + dbconfig.database);
 // expose this function to our app using module.exports

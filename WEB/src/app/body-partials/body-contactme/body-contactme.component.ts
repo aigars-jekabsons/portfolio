@@ -41,9 +41,9 @@ export class BodyContactmeComponent implements OnInit {
       dataFromForm[3] = Textfield[0].value;
 
         this.PostFormService.sendData(dataFromForm).subscribe(
-            response => console.log(), // success
-            error => console.log(),       // error
-            () => console.log(),     // complete
+            response => console.log('success'), // success
+            error => console.log('error'),       // error
+            () => console.log('complete'),     // complete
         )
         this.FormSubmitted = false;
     }

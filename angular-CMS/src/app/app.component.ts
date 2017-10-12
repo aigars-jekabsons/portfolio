@@ -19,13 +19,19 @@ export class AppComponent {
   info:any;
 
  constructor(public CheckloginService: CheckloginService) {
+
+      let CheckLoginStatus = () => {
         this.CheckloginService.PostForm().subscribe(data =>{ 
-        this.info = data
-        console.log()
-        if (this.info[0] == false){
-           window.location.href='http://localhost:3000/login';
-        }
-      });
+          this.info = data
+          if (this.info[0] == false){
+             window.location.href='http://localhost:3000/login';
+          } 
+        });
+      }
+    setInterval(function(){ 
+      CheckLoginStatus();
+     }, 300000);
+     CheckLoginStatus();
  }
 
     ngOnInit() {

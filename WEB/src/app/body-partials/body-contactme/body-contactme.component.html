@@ -16,7 +16,7 @@
     
         <div class="buttonarea col-lg-11 col-xs-12 text-right">
             <div class="row">
-                <button class="btn btn-primary" (click)="TriggerAlert()" >Submit</button>
+                <button class="btn btn-primary" (click)="TriggerAlert(); $event.stopPropagation();" >Submit</button>
             </div>
         </div>
 </div>

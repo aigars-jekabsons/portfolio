@@ -1,9 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="container">
-  <div style="text-align:center">
-    <h1>
-      Welcome to {{title}}!
-    </h1>
-
-  <router-outlet></router-outlet>
+<div class="fluid-container">
+  <cms-header></cms-header>
+  <cms-left-nav></cms-left-nav>
+  
+    
+ <div class="router-wrapper">
+    <router-outlet></router-outlet>
+ </div>
+  
 </div>
