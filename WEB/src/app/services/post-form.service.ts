@@ -20,5 +20,15 @@ export class PostFormService {
 
 }
 
+    sendBirdData(data): Observable<Object> {
+        let encoded_data = JSON.stringify({ data });
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http.post('http://ec2-18-216-24-220.us-east-2.compute.amazonaws.com:8080/controlData', encoded_data, options);
+        
 
 }
+
+
+} 

@@ -74,7 +74,6 @@ module.exports = function(app, passport) {
 		let content = [LoginStatus]
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		console.log(LoginStatus);
 		res.send(content);
 		res.end();
 	});

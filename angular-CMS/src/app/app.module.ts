@@ -9,6 +9,7 @@ import { LeftNavComponent } from './left-nav/left-nav.component';
 import { PageNotFoundComponent } from './body-components/page-not-found/page-not-found.component';
 import { HomePageComponent } from './body-components/home-page/home-page.component';
 import { ContactFormComponent } from './body-components/contact-form/contact-form.component';
+import { ContentManagementComponent } from './body-components/content-management/content-management.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ContactFormComponent } from './body-components/contact-form/contact-for
     LeftNavComponent,
     PageNotFoundComponent,
     HomePageComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    ContentManagementComponent
   ],
   imports: [
     BrowserModule,

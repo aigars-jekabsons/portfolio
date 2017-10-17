@@ -19,7 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "CMS",
       "styles": [
-        "styles.scss",
+        "./assets/css/styles.scss",
         "./assets/css/bootstrap.scss",
         "./assets/fonts/font-awesome-4.2.0/css/font-awesome.min.css"        
       ],

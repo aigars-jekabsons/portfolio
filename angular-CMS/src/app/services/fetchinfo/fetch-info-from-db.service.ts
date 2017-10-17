@@ -44,6 +44,18 @@ generateJSON(data): Observable<Object> {
   );
 
 }
+//Populates content for the content page
+PopulateContentSection(data): Observable<Object> {
+  let encoded_data = JSON.stringify({ data });
+  let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+  let options = new RequestOptions({ headers: headers });
+
+  return this.http.post('http://localhost:3000/api/populateContent', encoded_data, options).map(
+      (Response: Response) => Response.json() || {}
+      
+  );
+
+}
 
 }
 

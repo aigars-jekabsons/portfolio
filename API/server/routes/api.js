@@ -6,6 +6,7 @@ var con = mysql.createConnection(connection.Form_connectionString);
 var jsonfile = require('jsonfile')
 con.connect();
 
+/*HTTP GET REQUESTS*/
 
 //Sending content to Front End
 router.get('/getformcontent', function(req, res) {
@@ -20,6 +21,25 @@ router.get('/getformcontent', function(req, res) {
      res.end();
  });
 });
+
+
+
+
+/*HTTP POST REQUESTS*/
+
+router.post('/populateContent', function(req, res) {
+  var DBField = [req.body.data] 
+  var ContentObject = [];
+  var queryString = 'SELECT * FROM '+DBField+'';
+   con.query(queryString, function(err, rows, fields) {
+     if (err) throw err;
+      for (var i in rows) {ContentObject.push(rows[i]);}
+      res.send(ContentObject);
+      res.end();
+});
+});
+
+
 //Change status replied status
 router.post('/changeRepliedStatus', function(req, res) {
   var ChangeID = [req.body.data] 
@@ -54,15 +74,9 @@ router.post('/postform', function(req, res) {
 });
 
 
-//As the hosting where I have hosted my application allows for the connection to be max 5 min long
-// I have created script that reconnects every minute.
 
-setInterval(function () {
-  con.end(function(){
-      con = mysql.createConnection(connection.Form_connectionString);
-      con.connect();
-  });
-}, 180000);
+
+
 
 //Generating JSON File.
 router.post('/GenerateJSON', function(req, res) {
@@ -73,7 +87,15 @@ router.post('/GenerateJSON', function(req, res) {
   res.end('JSON has been generated');
 });
 
+//As the hosting where I have hosted my application allows for the connection to be max 5 min long
+// I have created script that reconnects every 3 minutes.
 
+setInterval(function () {
+  con.end(function(){
+      con = mysql.createConnection(connection.Form_connectionString);
+      con.connect();
+  });
+}, 180000);
 module.exports = router;
 
 
