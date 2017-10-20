@@ -54,4 +54,29 @@ require('./server/routes/auth.js')(app, passport); // load our routes and pass i
 // launch ======================================================================
 app.listen(port);
 
+app.use(express.static(path.join(__dirname, 'web')));
+
+app.use("/styles",  express.static(__dirname + '/web/stylesheets'));
+app.use("/scripts", express.static(__dirname + '/web/javascripts'));
+app.use("/images",  express.static(__dirname + '/web/images'))
+
+app.get('/', function(req, res) {
+    res.sendFile(__dirname+'/web/index.html');
+    
+});
+
+
+
+
+app.use(express.static(path.join(__dirname, 'cms')));
+
+app.use("/styles",  express.static(__dirname + '/cms/stylesheets'));
+app.use("/scripts", express.static(__dirname + '/cms/javascripts'));
+app.use("/images",  express.static(__dirname + '/cms/images'))
+
+app.get('/a-panel', function(req, res) {
+    res.sendFile(__dirname+'/cms/index.html');
+    
+});
+
 console.log('The magic happens on port ' + port);

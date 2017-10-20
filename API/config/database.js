@@ -1,9 +1,10 @@
 // config/database.js
-let host = 'www.ajtechlab.com',
-    user = 'wwwajtec_ajtech',
-    password = 'f0A%iv$R5kBh';
+let host = '139.59.164.147',
+    user = 'AngularConnectALL',
+    password = 'Parole123!';
     database = 'wwwajtec_ajtechlab';
-    
+
+
 module.exports = {
     'connection': {
         'host': host,
