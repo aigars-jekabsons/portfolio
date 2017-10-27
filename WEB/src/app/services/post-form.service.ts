@@ -6,7 +6,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 export class PostFormService {
 
-    public _url: string = "http://localhost:3000/api/postform"; // Url which handles JSON encoded data 
+    public _url: string = "api/postform"; // Url which handles JSON encoded data 
 
     constructor(public _http: Http) {} // Injecting the Http Service
 
