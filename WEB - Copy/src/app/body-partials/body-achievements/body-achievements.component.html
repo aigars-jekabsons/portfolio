@@ -1,0 +1,82 @@
+<div class="tetris-overlay">
+    <div class="container">
+
+        <div class="col-sm-10 disablefloat centerblock margintop5perc marginbottom10perc">
+            <h1 style="margin-top:0px;margin-bottom:20px"><strong>My expertise</strong></h1>
+            <div class="row textcenteronMobile">
+                <div class="col-md-3 font-large expertiselist">
+                    <p class="expertiseFont">Front-end</p>
+                    <ul>
+                        <li>HTML5</li>
+                        <li>SCSS</li>
+                        <li>JavaScript</li>
+                        <li>TypeScript</li>
+                        <li>CSS3</li>                        
+                    </ul>
+                </div>
+                <div class="col-md-3 font-large expertiselist">
+                    <p class="expertiseFont">Tools</p>
+                    <ul>
+                        <li>GIT</li>
+                        <li>TFS</li>
+                        <li>Jenkins</li>
+                        <li>SVN</li>
+                        <li>Webpack</li>                        
+                    </ul>
+                </div>
+                <div class="col-md-3 font-large expertiselist">
+                    <p class="expertiseFont">CMS</p>
+                    <ul>
+                        <li>Wordpress</li>
+                        <li>AEM</li>
+                        <li>Joomla</li>
+                        <li>Drupal</li>                        
+                        <li>Interwoven Teamsite</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 font-large expertiselist">
+                    <p class="expertiseFont ">Frameworks</p>
+                    <ul>
+                        <li>Angular 2</li>
+                        <li>Angular 1.x</li>
+                        <li>Bootstrap</li>
+                    </ul>
+                </div>
+
+            </div>
+                <br/>
+            <p class="font-large">
+                <strong>
+                I’m a passionate <span class="text-red">Senior Angular Front End developer.</span> I pride myself on developing
+                <span class="text-red">high quality code</span>, and focus on <span class="text-red">delivering</span> my projects
+                <span class="text-red">on time and to budget</span>. Some of my greatest <span class="text-red">assets</span>            
+                are my <span class="text-red">trouble-shooting skills</span> and my capacity to <span class="text-red">think critically</span>.
+                I can <span class="text-red">pick up a project</span> at any point in its lifecycle and confidently <span class="text-red">lead
+                it</span> in the direction the business requires. I never shy away from the challenges involved in meeting business
+                deadlines, as I’m confident in my ability to <span class="text-red">appreciate the full project picture</span> as well as the needs of the
+                business.
+                <br/><br/> From a personal perspective I have a genuine interest in understanding the business side of development,
+                including company strategy for the project, the technologies and methodologies involved in the full lifecycle,
+                as well as the social and behavioural element of how individuals interact with the project.
+                <br/><br/>
+                </strong>
+            </p>
+        </div>
+        <br/>
+    </div>
+    <div class="container-fluid col-xs-10">
+        <div class="col-sm-9 disablefloat">
+            <div class="periodic-table  text-right">
+                <div *ngFor="let PeriodicItem of testThePeriodicTable; let _index = index">
+                    <div class="itemNr{{_index}} periodic-item text-black">
+                        <h1><strong>{{PeriodicItem.mainElement[0].abbreviation}}</strong></h1>
+                        <p>{{PeriodicItem.mainElement[0].title}}</p>
+                    </div>
+                    <br *ngIf="PeriodicItem.breakpoint" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

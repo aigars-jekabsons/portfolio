@@ -5,9 +5,9 @@ import { HomePageComponent } from './body-components/home-page/home-page.compone
 import { ContactFormComponent } from './body-components/contact-form/contact-form.component';
 import { ContentManagementComponent } from './body-components/content-management/content-management.component';
 const routes: Routes = [
-  {path: '', component:  HomePageComponent },
-  {path: 'ContactForm', component: ContactFormComponent },
-  {path: 'manageContent', component: ContentManagementComponent },
+  {path: 'a-panel', component:  HomePageComponent },
+  {path: 'a-panel/ContactForm', component: ContactFormComponent },
+  {path: 'a-panel/manageContent', component: ContentManagementComponent },
   {path: '**', component: PageNotFoundComponent }
 ];
 

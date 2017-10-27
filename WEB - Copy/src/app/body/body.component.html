@@ -1,0 +1,10 @@
+
+<app-body-intro id="intro"  class="section intro text-black"></app-body-intro>
+<app-body-achievements id="achievements" class="section achievments text-black"></app-body-achievements>
+<app-body-portfolio (VideoLink)="FetchVideoLink($event)" (IsLightBoxVideo)="FetchLightBoxContent($event)" id="portfolio" class="section portfolio"></app-body-portfolio>
+<app-body-games (VideoLink)="FetchVideoLink($event)" (IsLightBoxVideo)="FetchLightBoxContent($event)" id="games" class="section games text-white"></app-body-games>
+<!--<app-body-periodic-table *ngIf="!displayPortfolioItem" id="periodic-table" class="section periodicTable text-white"></app-body-periodic-table>-->
+<app-body-contactme id="contactme" class="section contactme text-black"></app-body-contactme>
+<app-body-lightbox [VideoLink]="videoLink" [IslightboxContentaVideo]="IslightboxContentaVideo"  id="lightbox" class=""></app-body-lightbox>
+<!-- <app-body-portfolio-item [portfolioObject]="Myvariable" (PortfolioObject)="DisplayPortfolioContent($event)"  (DisplayPortfolioItem)="CheckPageStatus($event)"  *ngIf="displayPortfolioItem" id="portfolioitem" class="section portfolio-item text-white" ></app-body-portfolio-item> -->
+<app-footer></app-footer>

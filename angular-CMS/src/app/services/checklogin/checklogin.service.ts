@@ -7,7 +7,7 @@ export class CheckloginService {
   
   constructor(private http: Http) {} 
   PostForm() { 
-    return this.http.get('http://localhost:3000/checkstatus').map((res) => res.json());
+    return this.http.get('/checkstatus').map((res) => res.json());
   }
 
 }

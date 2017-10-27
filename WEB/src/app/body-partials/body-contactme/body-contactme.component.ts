@@ -30,14 +30,14 @@ export class BodyContactmeComponent implements OnInit {
  constructor(public PostFormService: PostFormService) {}
 
     ngOnInit() {}
-PostforBird() {
-let data = 5
-        this.PostFormService.sendBirdData(data).subscribe(
-            response => console.log(response), // success
-            error => console.log('error'),       // error
-            () => console.log('complete'),     // complete
-        )
-}
+// PostforBird() {
+// let data = 5
+//         this.PostFormService.sendBirdData(data).subscribe(
+//             response => console.log(response), // success
+//             error => console.log('error'),       // error
+//             () => console.log('complete'),     // complete
+//         )
+// }
     TriggerAlert() {
       let dataFromForm = [];
       var Inputfields = document.getElementById('myContactForm').querySelectorAll('input')

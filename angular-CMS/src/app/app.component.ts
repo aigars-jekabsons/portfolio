@@ -18,21 +18,21 @@ export class AppComponent {
   title = 'CMS';
   info:any;
 
- constructor(public CheckloginService: CheckloginService) {
-
-      let CheckLoginStatus = () => {
-        this.CheckloginService.PostForm().subscribe(data =>{ 
-          this.info = data
-          if (this.info[0] == false){
-             window.location.href='http://localhost:3000/login';
-          } 
-        });
-      }
-    setInterval(function(){ 
-      CheckLoginStatus();
-     }, 300000);
-     CheckLoginStatus();
- }
+  constructor(public CheckloginService: CheckloginService) {
+    
+          let CheckLoginStatus = () => {
+            this.CheckloginService.PostForm().subscribe(data =>{ 
+              this.info = data
+              if (this.info[0] == false){
+                 window.location.href='/login';
+              } 
+            });
+          }
+        setInterval(function(){ 
+          CheckLoginStatus();
+         }, 300000);
+         CheckLoginStatus();
+     }
 
     ngOnInit() {
 

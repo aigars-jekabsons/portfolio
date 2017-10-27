@@ -1,0 +1,28 @@
+<div *ngIf="IslightboxContentaVideo" class="lighbox-container video">
+    <div (click)="closelLightBox()" class="close-button"></div>
+    <iframe [src]="VideoLink | safeIframe" frameborder="0" allowfullscreen volume="0"></iframe>
+</div>
+<div *ngIf="!IslightboxContentaVideo" class="lighbox-container content paddingbottom2perc paddingtop2perc">
+    <div (click)="closelLightBox()" class="CloseButton"></div>
+    <div class="col-md-3">
+        <h2>{{VideoLink.Title}}</h2>
+        <br/><br/>
+        <p><strong>{{VideoLink.devYear}} Website</strong></p>
+    </div>
+    <div class="col-md-9">
+        <div class="carousel">
+            <ul class="slides">
+                <li *ngFor="let CarouselImages of VideoLink.carouselImages ">
+                    <img src="assets/images/portfolioImages/{{CarouselImages.image}}" alt="">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9 pull-right">
+        <p class="techstackTitle "><strong>Technology used</strong></p>
+        <img class="Techstack" src="assets/images/icons/scss.png"/>
+        <img class="Techstack" src="assets/images/icons/{{VideoLink.techstack}}"/>
+        <img class="CMS" src="assets/images/icons/{{VideoLink.CMSPlatform}}"/>
+    </div>
+</div>
+<div class="overlay"></div>
