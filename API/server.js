@@ -46,7 +46,7 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api', api);
-app.use(timeout('1s'));
+app.use(timeout('5s'));
 app.set('port', port);
 
 require('./server/routes/auth.js')(app, passport); // load our routes and pass in our app and fully configured passport

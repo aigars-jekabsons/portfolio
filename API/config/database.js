@@ -1,13 +1,15 @@
 // config/database.js
-let host = '139.59.164.147',
-    user = 'AngularConnectALL',
-    password = 'Parole123!';
+let host = 'myportfolio.cvanfsylbujq.eu-west-2.rds.amazonaws.com',
+    port = '3306',
+    user = 'root';
+    password = 'sragia26365222';
     database = 'wwwajtec_ajtechlab';
 
 
 module.exports = {
     'connection': {
         'host': host,
+        'port': port,
         'user': user,
         'password': password
     },
@@ -21,9 +23,17 @@ module.exports = {
         password: password,
         database: database,
         multipleStatements: false
+    },
+    Passport_connectionString : {
+        host: host,
+        port: port,
+        user: user,
+        password: password,
+        database: database,
+        user_table: 'users',
+        multipleStatements:false
     }
 };
-
 
 
 

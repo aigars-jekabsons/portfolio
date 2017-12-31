@@ -1,21 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject  } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable()
 export class PostFormService {
 
-    public _url: string = "api/postform"; // Url which handles JSON encoded data 
 
-    constructor(public _http: Http) {} // Injecting the Http Service
-
+    constructor(public _http: Http, @Inject(DOCUMENT) private document: Document) {} // Injecting the Http Service
     sendData(data): Observable<Object> {
+    if (this.document.location.origin == 'http://localhost:4200'){
+        var _url: string = "http://localhost:3000/api/postform";
+    } else {
+        var _url: string = "api/postform";
+    }
+    
+
+    
         let encoded_data = JSON.stringify({ data });
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
         let options = new RequestOptions({ headers: headers });
 
-        return this._http.post(this._url, encoded_data, options);
+        return this._http.post(_url, encoded_data, options);
         
 
 }

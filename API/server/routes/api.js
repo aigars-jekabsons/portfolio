@@ -2,24 +2,28 @@ var mysql = require('mysql');
 var connection = require('../../config/database.js');
 const express = require('express');
 const router = express.Router();
-var con = mysql.createConnection(connection.Form_connectionString);
+var pool = mysql.createPool(connection.Form_connectionString);
+
 var jsonfile = require('jsonfile')
-con.connect();
 
 /*HTTP GET REQUESTS*/
 
 //Sending content to Front End
 router.get('/getformcontent', function(req, res) {
+ pool.getConnection(function(err, connection) {
   var conactFormData = [];
   var queryString = 'SELECT * FROM ContactMeForm';
-   con.query(queryString, function(err, rows, fields) {
-     if (err) throw err;
-     for (var i in rows) {conactFormData.push(rows[i]);}
-     res.header("Access-Control-Allow-Origin", "*");
-     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-     res.send(conactFormData);
-     res.end();
- });
+  connection.query(queryString, function (error,rows, results, fields) {
+    connection.destroy();    
+    if (error) throw error;
+    for (var i in rows) {conactFormData.push(rows[i]);}
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.send(conactFormData);
+    res.end();
+    
+  });
+});
 });
 
 
@@ -28,47 +32,62 @@ router.get('/getformcontent', function(req, res) {
 /*HTTP POST REQUESTS*/
 
 router.post('/populateContent', function(req, res) {
+pool.getConnection(function(err, connection) {
   var DBField = [req.body.data] 
   var ContentObject = [];
   var queryString = 'SELECT * FROM '+DBField+'';
-   con.query(queryString, function(err, rows, fields) {
-     if (err) throw err;
-      for (var i in rows) {ContentObject.push(rows[i]);}
-      res.send(ContentObject);
-      res.end();
+  connection.query(queryString, function (error, rows, fields, results) {
+    connection.destroy();        
+    if (error) throw error;
+    for (var i in rows) {ContentObject.push(rows[i]);}
+    res.send(ContentObject);
+    res.end();
+  });
 });
+
 });
 
 
 //Change status replied status
 router.post('/changeRepliedStatus', function(req, res) {
-  var ChangeID = [req.body.data] 
-    var sql = "UPDATE `ContactMeForm` SET Replied ='Yes' WHERE ID = "+ChangeID+";";
-      con.query(sql, function (err, result){
-        if (err) throw err
+      pool.getConnection(function(err, connection) {
+        var ChangeID = [req.body.data] 
+        var sql = "UPDATE `ContactMeForm` SET Replied ='Yes' WHERE ID = "+ChangeID+";";
+        connection.query(sql, function (error, results, fields) {
+          connection.destroy();
+          if (error) throw error;
+        });
       });
-      res.send('Status has been changed');
+      res.send('Entry has been deleted');            
       res.end();
 });
 //Deletes an entry
 router.post('/DeleteEntry', function(req, res) {
-  var ChangeID = [req.body.data] 
-    var sql = "DELETE FROM `ContactMeForm` WHERE ID = "+ChangeID+";";
-      con.query(sql, function (err, result){
-        if (err) throw err
+      pool.getConnection(function(err, connection) {
+        var ChangeID = [req.body.data] 
+        var sql = "DELETE FROM `ContactMeForm` WHERE ID = "+ChangeID+";";
+        connection.query(sql, function (error, results, fields) {
+          connection.destroy();
+          if (error) throw error;
+        });
       });
-      res.send('Entry has been deleted');
+      res.send('Entry has been deleted');      
       res.end();
+
 });
 
 
 
 
 router.post('/postform', function(req, res) {
-    var sql = "INSERT INTO ContactMeForm (name, email, number, message) VALUES ?";
-    var values = [req.body.data] 
-      con.query(sql, [values], function (err, result){
+    pool.getConnection(function(err, connection) {
+      var sql = "INSERT INTO ContactMeForm (name, email, number, message) VALUES ?";
+      var values = [req.body.data]
+      connection.query(sql, [values], function (error, results, fields) {
+        connection.destroy();
+        if (error) throw error;
       });
+    });
       res.send('Form has been submitted');
       res.end();
 });
@@ -90,12 +109,7 @@ router.post('/GenerateJSON', function(req, res) {
 //As the hosting where I have hosted my application allows for the connection to be max 5 min long
 // I have created script that reconnects every 3 minutes.
 
-setInterval(function () {
-  con.end(function(){
-      con = mysql.createConnection(connection.Form_connectionString);
-      con.connect();
-  });
-}, 180000);
+
 module.exports = router;
 
 

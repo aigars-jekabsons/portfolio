@@ -1,14 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, RequestOptions, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable()
-export class FetchInfoFromDbService {
 
-  constructor(private http: Http) {} 
+export class FetchInfoFromDbService {
+public baseUrl;
+  constructor(private http: Http, @Inject(DOCUMENT) private document: Document) {
+    console.log(this.document.location.origin)
+    if (this.document.location.origin == 'http://localhost:4201'){
+     this.baseUrl = "http://localhost:3000/";
+  } else {
+    this.baseUrl = "";
+  };
+  } 
+
+
   ContactForm() { 
-    return this.http.get('api/getformcontent').map((res) => res.json());
+    console.log(this.baseUrl)
+    return this.http.get(this.baseUrl +'api/getformcontent').map((res) => res.json());
   }
 
   RepliedStatus(data): Observable<Object> {
@@ -16,7 +28,7 @@ export class FetchInfoFromDbService {
     let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post('api/changeRepliedStatus', encoded_data, options).map(
+    return this.http.post(this.baseUrl +'api/changeRepliedStatus', encoded_data, options).map(
         (res: Response) => res.json() || {}
     );
 
@@ -28,7 +40,7 @@ DeleteContact(data): Observable<Object> {
   let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
   let options = new RequestOptions({ headers: headers });
 
-  return this.http.post('api/DeleteEntry', encoded_data, options).map(
+  return this.http.post(this.baseUrl +'api/DeleteEntry', encoded_data, options).map(
       (res: Response) => res.json() || {}
   );
 
@@ -39,7 +51,7 @@ generateJSON(data): Observable<Object> {
   let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
   let options = new RequestOptions({ headers: headers });
 
-  return this.http.post('api/generateJSON', encoded_data, options).map(
+  return this.http.post(this.baseUrl +'api/generateJSON', encoded_data, options).map(
       (res: Response) => res.json() || {}
   );
 
@@ -50,7 +62,7 @@ PopulateContentSection(data): Observable<Object> {
   let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
   let options = new RequestOptions({ headers: headers });
 
-  return this.http.post('api/populateContent', encoded_data, options).map(
+  return this.http.post(this.baseUrl +'api/populateContent', encoded_data, options).map(
       (Response: Response) => Response.json() || {}
       
   );

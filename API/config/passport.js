@@ -1,34 +1,23 @@
 // config/passport.js
+var connection = require('./database.js');
 
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
-
 // load up the user model
 var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
 var dbconfig = require('./database');
-var connection = mysql.createConnection({
-    'host': 'www.ajtechlab.com',
-    'user': 'wwwajtec_ajtech',
-    'password': 'f0A%iv$R5kBh',
-    'database': 'wwwajtec_ajtechlab',
-    'users_table': 'users'
-    });
+var PoolConnection = mysql.createPool(connection.Passport_connectionString);
 
-setInterval(function () {
-    connection.end(function(){
-        connection = mysql.createConnection({
-                'host': 'www.ajtechlab.com',
-                'user': 'wwwajtec_ajtech',
-                'password': 'f0A%iv$R5kBh',
-                'database': 'wwwajtec_ajtechlab',
-                'users_table': 'users'
-                });
-        connection.connect();
-    });
-  }, 180000);
 
-connection.query('USE ' + dbconfig.database);
+
+
+PoolConnection.getConnection(function(err, connection) {
+    connection.query('USE ' + dbconfig.database, function(err, rows){
+        connection.destroy();
+    });
+  });
+
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 
@@ -45,9 +34,13 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err, rows){
-            done(err, rows[0]);
-        });
+        PoolConnection.getConnection(function(err, connection) {
+            connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err, rows){
+                connection.destroy();                
+                done(err, rows[0]);
+            });
+          });
+
     });
 
     // =========================================================================
@@ -67,28 +60,65 @@ module.exports = function(passport) {
         function(req, username, password, done) {
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
-            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows) {
-                if (err)
-                    return done(err);
-                if (rows.length) {
-                    return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
-                } else {
-                    // if there is no user with that username
-                    // create the user
-                    var newUserMysql = {
-                        username: username,
-                        password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))  // use the generateHash function in our user model
-                    };
+            
+            PoolConnection.getConnection(function(err, connection) {
+                connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows) {
+                    connection.destroy();                    
+                    if (err)
+                        return done(err);
+                    if (rows.length) {
+                        return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+                    } else {
+                        // if there is no user with that username
+                        // create the user
+                        var newUserMysql = {
+                            username: username,
+                            password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))  // use the generateHash function in our user model
+                        };
+    
+                        var insertQuery = "INSERT INTO users ( username, password ) values (?,?)";
+    
+                        connection.query(insertQuery,[newUserMysql.username, newUserMysql.password],function(err, rows) {
+                        connection.destroy();                    
+                            newUserMysql.id = rows.insertId;
+    
+                            return done(null, newUserMysql);
+                        });
+                    }
 
-                    var insertQuery = "INSERT INTO users ( username, password ) values (?,?)";
-
-                    connection.query(insertQuery,[newUserMysql.username, newUserMysql.password],function(err, rows) {
-                        newUserMysql.id = rows.insertId;
-
-                        return done(null, newUserMysql);
-                    });
-                }
+                });
             });
+
+
+            PoolConnection.getConnection(function(err, connection) {
+                connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows) {
+                    connection.destroy();
+                    
+                    if (err)
+                        return done(err);
+                    if (rows.length) {
+                        return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+                    } else {
+                        // if there is no user with that username
+                        // create the user
+                        var newUserMysql = {
+                            username: username,
+                            password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))  // use the generateHash function in our user model
+                        };
+    
+                        var insertQuery = "INSERT INTO users ( username, password ) values (?,?)";
+    
+                        connection.query(insertQuery,[newUserMysql.username, newUserMysql.password],function(err, rows) {
+                        connection.destroy();
+                
+                            newUserMysql.id = rows.insertId;
+    
+                            return done(null, newUserMysql);
+                        });
+                    }
+                });
+              });
+            
         })
     );
 
@@ -107,20 +137,25 @@ module.exports = function(passport) {
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, username, password, done) { // callback with email and password from our form
-            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows){
-                if (err)
-                    return done(err);
-                if (!rows.length) {
-                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
-                }
 
-                // if the user is found but the password is wrong
-                if (!bcrypt.compareSync(password, rows[0].password))
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+            PoolConnection.getConnection(function(err, connection) {
+                connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows){
+                    connection.destroy();                    
+                    if (err)
+                        return done(err);
+                    if (!rows.length) {
+                        return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                    }
+    
+                    // if the user is found but the password is wrong
+                    if (!bcrypt.compareSync(password, rows[0].password))
+                        return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+    
+                    // all is well, return successful user
+                    return done(null, rows[0]);
+                });
+              });
 
-                // all is well, return successful user
-                return done(null, rows[0]);
-            });
         })
     );
 };
