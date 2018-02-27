@@ -23,6 +23,7 @@ import { BodyLightboxComponent } from './body-partials/body-lightbox/body-lightb
 import { SafeIframePipe } from './pipes/safe-iframe/safe-iframe.pipe';
 import { SnakeComponent } from './snake/snake.component';
 import { FooterComponent } from './footer/footer.component';
+import { MinesweeperComponent } from './minesweeper/minesweeper.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FooterComponent } from './footer/footer.component';
     SafeIframePipe,
     SnakeComponent,
     FooterComponent,
+    MinesweeperComponent,
     
   ],
   imports: [

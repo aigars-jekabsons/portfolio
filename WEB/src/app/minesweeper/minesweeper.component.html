@@ -1,0 +1,13 @@
+<p>
+  minesweeper works!
+</p>
+<div class="mineSweeperGrid">
+  <div class="config">
+    <button (click)="startTheGame()">Start the game</button>
+  </div>
+  <div class="rows" *ngFor="let GridID of mineSweeperGrid; let y = index ">
+    <div (click)="checkForMines(x,y)" class="columns type-{{GridID2}}" *ngFor="let GridID2 of GridID;  let x = index ">
+      <div id="carrot-{{x}}{{y}}" class="carrots"></div>
+    </div> 
+  </div> 
+</div>
